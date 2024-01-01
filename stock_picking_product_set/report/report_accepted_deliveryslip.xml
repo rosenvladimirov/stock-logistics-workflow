@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_accepted_delivery_document" inherit_id="report_accepted_delivery.report_accepted_delivery_document">
+        <xpath expr="//t[@t-set='lines']" position="after">
+            <t t-set="product_set_id" t-value="False"/>
+            <t t-set="lines_size" t-value="len(lines)"/>
+        </xpath>
+        <xpath expr="//tr[@name='move_line_not_done']" position="before">
+            <tr name="tr_product_sets" class="o_line_section" t-if="move.product_set_id != product_set_id">
+                <t t-set="product_set_id" t-value="move.product_set_id"/>
+                <td name="td_product_set" colspan="99">
+                    <span t-field="move.product_set_id"/>
+                </td>
+            </tr>
+        </xpath>
+        <xpath expr="//tr[@name='move_line_not_done']" position="after">
+            <tr name="td_product_set_subtotals" class="is-subtotal" t-if="(move_index + 1 == lines_size or move.product_set_id != product_set_id)">
+                <td name="td_product_set_subtotal" colspan="2" class="text-end">
+                    <span>Subtotal #: </span>
+                </td>
+                <td name="td_product_set_subtotal_qty" class="text-end">
+                    <span t-esc="sum([x.quantity for x in o.product_set_ids.filtered(lambda r: r.product_set_id.id == product_set_id.id)])"/>
+                </td>
+                <td />
+            </tr>
+        </xpath>
+    </template>
+    <template id="stock_report_delivery_aggregated_move_lines" inherit_id="report_accepted_delivery.stock_report_delivery_aggregated_move_lines">
+        <xpath expr="//t[@t-foreach='aggregated_lines']" position="before">
+            <t t-set="product_set_id" t-value="False"/>
+            <t t-set="lines_size" t-value="len(aggregated_lines)"/>
+        </xpath>
+        <xpath expr="//tr[@name='tr_aggregated_move_lines']" position="before">
+            <t t-if="aggregated_lines[line].get('product_set_id') and aggregated_lines[line]['product_set_id'] != product_set_id">
+                <t t-set="product_set_id" t-value="aggregated_lines[line]['product_set_id']"/>
+                <tr name="td_product_sets" class="o_line_section">
+                    <td name="td_product_set" colspan="99">
+                        <span t-esc="aggregated_lines[line]['product_set_id'].display_name"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+        <xpath expr="//tr[@name='tr_aggregated_move_lines']" position="after">
+            <t t-if="aggregated_lines[line].get('product_set_id') and (line_index + 1 == lines_size or aggregated_lines[line]['product_set_id'] != product_set_id)">
+                <tr name="td_product_set_subtotals" class="is-subtotal">
+                    <td name="td_product_set_subtotal" colspan="2" class="text-end">
+                        <span>Subtotal #: </span>
+                    </td>
+                    <td name="td_product_set" colspan="99" class="text-end">
+                        <span t-esc="sum([x.quantity for x in o.product_set_ids.filtered(lambda r: r.product_set_id.id == product_set_id.id)])"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+    </template>
+</odoo>

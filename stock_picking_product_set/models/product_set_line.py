@@ -10,7 +10,11 @@ class ProductSetLine(models.Model):
     def prepare_stock_move_values(self, picking, quantity, max_sequence=0):
         self.ensure_one()
         return {
-            "order_id": picking.id,
+            "picking_id": picking.id,
+            "name": self.display_name,
+            "reference": picking.name,
+            "location_id": picking.location_id.id,
+            "location_dest_id": picking.location_dest_id.id,
             "product_set_id": self.product_set_id.id,
             "product_id": self.product_id.id,
             "product_uom_qty": self.quantity * quantity,

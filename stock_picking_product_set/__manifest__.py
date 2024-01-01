@@ -14,10 +14,13 @@
         'sale_product_set',
         'sale_stock',
         'stock',
+        'report_accepted_delivery',
     ],
     'data': [
         'security/ir.model.access.csv',
+        'wizard/product_set_add.xml',
         'views/stock_picking_views.xml',
+        'report/report_accepted_deliveryslip.xml',
     ],
     'demo': [
     ],

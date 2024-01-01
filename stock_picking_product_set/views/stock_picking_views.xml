@@ -5,7 +5,6 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
-
             <xpath expr="//notebook" position="inside">
                 <page string="Product sets" name="product_sets">
                     <field name="product_set_ids" mode="tree">
@@ -18,6 +17,14 @@
                 </page>
             </xpath>
             <xpath expr="//field[@name='move_ids_without_package']/tree" position="inside">
+                <control>
+                    <create string="Add a line"/>
+                    <button name="%(act_open_wizard_product_set_add_from_picking)d"
+                            class="btn-link"
+                            type="action"
+                            string="Add set"
+                            context="{'default_picking_id': parent.id, 'default_partner_id': parent.partner_id, 'active_id': parent.id, 'active_model': 'stock.picking'}"/>
+                </control>
                 <field name="product_set_id"
                        options='{"no_create": True}'
                        optional="hide"/>
