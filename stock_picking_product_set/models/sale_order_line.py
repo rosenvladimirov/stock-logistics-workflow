@@ -1,9 +1,11 @@
 #  Part of Odoo. See LICENSE file for full copyright and licensing details.
-from odoo import models, _
+from odoo import models, _, fields
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
+
+    sequence = fields.Integer('Sequence', default=10)
 
     def _prepare_procurement_values(self, group_id=False):
         values = super(SaleOrderLine, self)._prepare_procurement_values(group_id)

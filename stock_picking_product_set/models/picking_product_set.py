@@ -1,11 +1,10 @@
 #  Part of Odoo. See LICENSE file for full copyright and licensing details.
-from odoo import api, fields, models, _
+from odoo import fields, models, _
 
 
 class PickingProductSet(models.Model):
     _name = 'picking.product.set'
     _description = 'Stock Picking Sets'
-    # _auto = False
 
     picking_id = fields.Many2one('stock.picking', 'Picking', required=True)
     product_set_id = fields.Many2one('product.set', 'Product Set')

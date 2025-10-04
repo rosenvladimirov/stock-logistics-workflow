@@ -35,7 +35,7 @@ class Picking(models.Model):
                 for stock_move_id in lines:
                     if stock_move_id.product_id.id == compensation_product_id:
                         if stock_move_id.state == 'done':
-                            total_quantity += stock_move_id.quantity_done
+                            total_quantity += stock_move_id.product_qty
                         else:
                             total_quantity += stock_move_id.product_uom_qty
 

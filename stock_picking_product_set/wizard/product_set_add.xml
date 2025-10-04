@@ -27,11 +27,11 @@
                         widget="section_and_note_one2many"
                         domain="[('product_set_id', '=', product_set_id)]"
                     >
-                        <tree>
+                        <list>
                             <field
                                 name="product_id"
                                 options="{'no_open': True, 'no_create': True}"
-                                attrs="{'required': [('display_type', '=', False)]}"
+                                required="not display_type"
                             />
                             <field name="display_type" />
                             <field name="name" widget="section_and_note_text" />
@@ -48,7 +48,7 @@
                                     context="{'default_display_type': 'line_note'}"
                                 />
                             </control>
-                        </tree>
+                        </list>
                     </field>
                 </group>
                 <footer>
@@ -76,7 +76,7 @@
         <field name="target">new</field>
     </record>
     <record id="act_open_wizard_product_set_add_from_set" model="ir.actions.act_window">
-        <field name="name">Add set to stock picking</field>
+        <field name="name">Add a set to stock picking</field>
         <field name="res_model">picking.product.set.add</field>
         <field name="binding_model_id" ref="product_set.model_product_set" />
         <field name="view_mode">form</field>
