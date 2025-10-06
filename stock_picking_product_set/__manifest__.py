@@ -22,7 +22,7 @@
         'security/ir.model.access.csv',
         'wizard/product_set_add.xml',
         'views/stock_picking_views.xml',
-        # 'report/report_accepted_deliveryslip.xml',
+        'report/report_accepted_deliveryslip.xml',
     ],
     'demo': [],
     'installable': True,
