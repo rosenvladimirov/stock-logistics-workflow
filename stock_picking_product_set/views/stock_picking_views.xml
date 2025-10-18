@@ -7,12 +7,12 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Product sets" name="product_sets" invisible="not product_set_ids">
-                    <field name="product_set_ids" mode="tree">
-                        <tree>
+                    <field name="product_set_ids" mode="list">
+                        <list>
                             <field name="picking_id" invisible="1"/>
                             <field name="product_set_id"/>
                             <field name="quantity"/>
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>
